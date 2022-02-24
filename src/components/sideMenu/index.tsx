@@ -1,7 +1,6 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
-import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import List from "@mui/material/List";
 import Typography from "@mui/material/Typography";
@@ -18,6 +17,7 @@ import ChatBubbleRoundedIcon from "@mui/icons-material/ChatBubbleRounded";
 import IconButton from "@mui/material/IconButton";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { Link } from "react-router-dom";
+import Grid from "@mui/material/Grid";
 
 const drawerWidth = 300;
 
@@ -28,7 +28,9 @@ interface SideMenuProps {
 export function SideMenu(props: SideMenuProps) {
   const { component, children } = props;
   return (
-    <Box sx={{ display: "flex" }}>
+    <Box
+      sx={{ display: "flex", backgroundColor: "#F3F7FF", minHeight: "100vh" }}
+    >
       <Drawer
         sx={{
           width: drawerWidth,
@@ -163,10 +165,10 @@ export function SideMenu(props: SideMenuProps) {
           ))}
         </List>
       </Drawer>
-      <Box sx={{ p: 2 }}>
+      <Grid sx={{ p: 2, width: "100%" }}>
         {component}
         {children}
-      </Box>
+      </Grid>
     </Box>
   );
 }

@@ -8,7 +8,6 @@ function App() {
   return (
     <div className="App">
       <SideMenu>
-        <h1>Welcome to React Router!</h1>
         <Routes>
           <Route path="/" element={<Dashboard />} />
           <Route path="/tools" element={<TradingTools />} />
