@@ -1,9 +1,9 @@
-import { Box, TextField } from "@mui/material";
-import { FormInputOutlined } from "components";
 import React from "react";
-import { useFormContext, Controller } from "react-hook-form";
+import { Box } from "@mui/material";
+import { FormInputText } from "components";
+import { useFormContext } from "react-hook-form";
 export const ProfitCalculator = () => {
-  const { control, watch } = useFormContext();
+  const { watch } = useFormContext();
   const lotSize = watch("lotSize", 0);
   const numberOfPips = watch("numberOfPips", 0);
   const profit = numberOfPips * lotSize || "";
@@ -12,42 +12,15 @@ export const ProfitCalculator = () => {
       sx={{
         display: "flex",
         alignItems: "center",
-        paddingBottom: 2,
+        paddingY: 4,
         borderBottom: "1px solid #F3F7FF",
       }}
     >
-      <Controller
-        name={"lotSize"}
-        control={control}
-        render={({ field: { onChange, value } }) => (
-          <TextField onChange={onChange} value={value} label={"Lot size"} />
-        )}
-      />
-      <FormInputOutlined />
+      <FormInputText name="lotSize" label="Lot size" />
       <Box>X</Box>
-      <Controller
-        name={"numberOfPips"}
-        control={control}
-        render={({ field: { onChange, value } }) => (
-          <TextField
-            onChange={onChange}
-            value={value}
-            label={"Number of PIPs"}
-          />
-        )}
-      />
+      <FormInputText name="numberOfPips" label="Number of PIPs" />
       <Box>=</Box>
-      <Controller
-        name={"profit"}
-        control={control}
-        render={({ field: { onChange, value } }) => (
-          <TextField
-            value={profit}
-            label={"profit"}
-            onClick={() => navigator.clipboard.writeText(`${profit}`)}
-          />
-        )}
-      />
+      <FormInputText name="profit" label="profit" options={{ value: profit }} />
     </Box>
   );
 };
