@@ -14,6 +14,8 @@ import {
 import { ProfitCalculator } from "components/ProfitCalculator";
 import { TradeCalculator } from "components";
 import { NewsTable } from "components/NewsTable";
+import { OnGoingTradeTable } from "components/OnGoingTradeTable";
+import { PendingOrderTable } from "components/PendingOrderTable";
 
 const Item = styled(Paper)(({ theme, padding }: any) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -53,10 +55,10 @@ export const TradingTools = () => {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <Grid container spacing={4} columns={{ xs: 4, sm: 8, md: 12 }}>
-        <Grid item xs={2} sm={4} md={6} key={2}>
+      <Grid container spacing={2} columns={{ xs: 4, sm: 8, md: 12 }}>
+        <Grid item xs={2} sm={4} md={5} key={2}>
           <FormProvider {...formMethods}>
-            <Item>
+            <Item padding={2}>
               <form>
                 <ProfitCalculator />
                 <TradeCalculator />
@@ -81,16 +83,32 @@ export const TradingTools = () => {
             </Item>
           </FormProvider>
         </Grid>
-        <Grid item xs={2} sm={4} md={6} key={2}>
+        <Grid item xs={2} sm={4} md={7} key={2}>
           <Grid container spacing={2} columns={{ xs: 4, sm: 8, md: 12 }}>
             <Grid item xs={2} sm={4} md={12} key={2}>
-              <Item padding={0}>
-                <NewsTable />
-              </Item>
+              <Grid container spacing={2} columns={{ xs: 4, sm: 8, md: 12 }}>
+                <Grid item xs={2} sm={6} md={8} key={2}>
+                  <Item padding={0}></Item>
+                </Grid>
+                <Grid item xs={2} sm={4} md={4} key={2}>
+                  <Item padding={0}>
+                    <NewsTable />
+                  </Item>
+                </Grid>
+              </Grid>
             </Grid>
             <Grid item xs={2} sm={4} md={12} key={2}>
-              <Item>xs=2</Item>
+              <Item padding={2}>
+                <OnGoingTradeTable />
+              </Item>
             </Grid>
+          </Grid>
+        </Grid>
+        <Grid item xs={2} sm={4} md={12} key={2}>
+          <Grid item xs={2} sm={4} md={12} key={2}>
+            <Item padding={2}>
+              <PendingOrderTable />
+            </Item>
           </Grid>
         </Grid>
       </Grid>

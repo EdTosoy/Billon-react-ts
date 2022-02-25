@@ -1,91 +1,82 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import Box from "@mui/material/Box";
 import {
-  Typography,
   List,
   ListItem,
   ListItemText,
+  ListItemIcon,
+  Typography,
   Button,
+  ButtonBase,
 } from "@mui/material";
+import FolderIcon from "@mui/icons-material/Folder";
 import { useForm } from "react-hook-form";
+import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
 interface INewsTableFormValues {
-  green: string[];
-  yellow: string[];
-  red: string[];
+  news: INews[] | null;
 }
+interface INews {
+  currency: string;
+  type:
+    | "inherit"
+    | "action"
+    | "disabled"
+    | "primary"
+    | "secondary"
+    | "error"
+    | "info"
+    | "success"
+    | "warning";
+}
+
+const newsData: Array<INews> = [
+  { currency: "USD", type: "success" },
+  { currency: "USD", type: "success" },
+  { currency: "USD", type: "success" },
+  { currency: "USD", type: "success" },
+  { currency: "USD", type: "warning" },
+  { currency: "USD", type: "warning" },
+  { currency: "USD", type: "warning" },
+  { currency: "USD", type: "error" },
+  { currency: "USD", type: "error" },
+  { currency: "USD", type: "disabled" },
+];
 export const NewsTable = () => {
-  const { handleSubmit, watch } = useForm<INewsTableFormValues>({
+  const { watch, setValue } = useForm<INewsTableFormValues>({
     defaultValues: {
-      green: ["USD", "JPY", "KKK"],
-      yellow: ["USD", "JPY", "KKK"],
-      red: ["USD", "JPY", "KKK"],
+      news: null,
     },
   });
-  const onSubmit = (data: any) => console.log(data);
 
-  const [green, red, yellow] = watch(["green", "red", "yellow"]);
+  const news = watch("news");
+
+  useEffect(() => {
+    setValue("news", newsData);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
-    <>
-      <Box
+    <Box sx={{ display: "grid", placeContent: "center" }}>
+      <List
+        dense
         sx={{
           display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          paddingX: 2,
-          paddingY: 1,
-          borderBottom: "1px solid #F3F7FF",
+          flexWrap: "wrap",
+          justifyContent: "space-evenly",
         }}
       >
-        <Typography sx={{ fontSize: 13 }}>economic news</Typography>
-        <Button variant="text" sx={{ fontSize: 11 }}>
-          Edit
-        </Button>
-      </Box>
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "space-around",
-          paddingTop: 2,
-        }}
-      >
-        <Box sx={{ flexGrow: 1 }}>
-          <Typography color="green">Green</Typography>
-          <Box>
-            <List dense>
-              {green.map((text, index) => (
-                <ListItem key={index} sx={{ textAlign: "center" }}>
-                  <ListItemText primary={text} />
-                </ListItem>
-              ))}
-            </List>
-          </Box>
-        </Box>
-        <Box sx={{ flexGrow: 1 }}>
-          <Typography color="yellow">Yellow</Typography>
-          <Box>
-            <List dense>
-              {yellow.map((text, index) => (
-                <ListItem key={index} sx={{ textAlign: "center" }}>
-                  <ListItemText primary={text} />
-                </ListItem>
-              ))}
-            </List>
-          </Box>
-        </Box>
-        <Box sx={{ flexGrow: 1 }}>
-          <Typography color="red">Red</Typography>
-          <Box>
-            <List dense>
-              {red.map((text, index) => (
-                <ListItem key={index} sx={{ textAlign: "center" }}>
-                  <ListItemText primary={text} />
-                </ListItem>
-              ))}
-            </List>
-          </Box>
-        </Box>
-      </Box>
-    </>
+        {news?.map(({ currency, type }, index) => (
+          <ListItem sx={{ width: "auto" }} key={index}>
+            <ListItemIcon sx={{ gap: 1 }}>
+              <FolderIcon color={type} />
+              <Typography variant="body1" sx={{ fontWeight: "bold" }}>
+                {currency}
+              </Typography>
+            </ListItemIcon>
+          </ListItem>
+        ))}
+      </List>
+    </Box>
   );
 };
