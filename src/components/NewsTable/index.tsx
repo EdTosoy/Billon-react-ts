@@ -49,6 +49,9 @@ export const NewsTable = () => {
     },
   });
 
+  // FOREX FACTORY JSON
+  // https://nfs.faireconomy.media/ff_calendar_thisweek.json
+
   const news = watch("news");
 
   useEffect(() => {

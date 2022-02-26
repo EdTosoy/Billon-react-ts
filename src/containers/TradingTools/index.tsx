@@ -16,6 +16,7 @@ import { TradeCalculator } from "components";
 import { NewsTable } from "components/NewsTable";
 import { OnGoingTradeTable } from "components/OnGoingTradeTable";
 import { PendingOrderTable } from "components/PendingOrderTable";
+import { TradingTimeSessionTable } from "components/TradingTimeSessionTable";
 
 const Item = styled(Paper)(({ theme, padding }: any) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -56,7 +57,7 @@ export const TradingTools = () => {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <Grid container spacing={2} columns={{ xs: 4, sm: 8, md: 12 }}>
-        <Grid item xs={2} sm={4} md={5} key={2}>
+        <Grid item xs={2} sm={4} md={5.5} key={2}>
           <FormProvider {...formMethods}>
             <Item padding={2}>
               <form>
@@ -83,14 +84,16 @@ export const TradingTools = () => {
             </Item>
           </FormProvider>
         </Grid>
-        <Grid item xs={2} sm={4} md={7} key={2}>
+        <Grid item xs={2} sm={4} md={6.5} key={2}>
           <Grid container spacing={2} columns={{ xs: 4, sm: 8, md: 12 }}>
             <Grid item xs={2} sm={4} md={12} key={2}>
               <Grid container spacing={2} columns={{ xs: 4, sm: 8, md: 12 }}>
-                <Grid item xs={2} sm={6} md={8} key={2}>
-                  <Item padding={0}></Item>
+                <Grid item xs={2} sm={6} md={6} key={2}>
+                  <Item padding={0}>
+                    <TradingTimeSessionTable />
+                  </Item>
                 </Grid>
-                <Grid item xs={2} sm={4} md={4} key={2}>
+                <Grid item xs={2} sm={4} md={6} key={2}>
                   <Item padding={0}>
                     <NewsTable />
                   </Item>

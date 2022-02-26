@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Box, TextField } from "@mui/material";
+import { Box, Button, TextField } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -63,23 +63,23 @@ export const OnGoingTradeTable = () => {
         <Table aria-label="customized table">
           <TableHead>
             <TableRow>
-              <TableCell>Name</TableCell>
-              <TableCell align="right">Calories</TableCell>
-              <TableCell align="right">Fat&nbsp;(g)</TableCell>
-              <TableCell align="right">Carbs&nbsp;(g)</TableCell>
-              <TableCell align="right">Protein&nbsp;(g)</TableCell>
+              <TableCell align="center">Currency</TableCell>
+              <TableCell align="center">Date / Time</TableCell>
+              <TableCell align="center">Buy/Sell</TableCell>
+              <TableCell align="center">Results</TableCell>
+              <TableCell align="center">Equity</TableCell>
+              <TableCell align="center">Actions</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {onGoingTrades.map(({ calories, carb, fat, id, name }) => (
               <StyledTableRow key={id}>
-                <TableCell component="th" scope="row">
-                  {id}
-                </TableCell>
-                <TableCell align="right">{calories}</TableCell>
-                <TableCell align="right">{carb}</TableCell>
-                <TableCell align="right">{fat}</TableCell>
-                <TableCell align="right">{name}</TableCell>
+                <TableCell align="center">{id}</TableCell>
+                <TableCell align="center">{calories}</TableCell>
+                <TableCell align="center">{carb}</TableCell>
+                <TableCell align="center">Drop Down, with close </TableCell>
+                <TableCell align="center">{carb} input if close</TableCell>
+                <TableCell align="center">Submit</TableCell>
               </StyledTableRow>
             ))}
           </TableBody>

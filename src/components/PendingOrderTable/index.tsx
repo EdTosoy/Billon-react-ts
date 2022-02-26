@@ -1,5 +1,6 @@
+/* eslint-disable no-sparse-arrays */
 import React, { useEffect } from "react";
-import { Box, TextField } from "@mui/material";
+import { Box, Button, TextField } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -26,21 +27,53 @@ interface IOngoinTradesTable {
   fat: string;
   carb: string;
   id: string;
+  planned: string;
+  createdAt: string;
+  confidence: string;
 }
 type FormValues = {
   pendingOrders: IOngoinTradesTable[];
 };
 
 const dataSource = [
-  { name: "yo", calories: "yo", fat: "yo", carb: "yo", id: "yo" },
-  { name: "yo", calories: "yo", fat: "yo", carb: "yo", id: "yo" },
-  { name: "yo", calories: "yo", fat: "yo", carb: "yo", id: "yo" },
+  {
+    name: "USD/JPY",
+    calories: "BUY",
+    fat: "Engulfing",
+    carb: "W1, H4, H1",
+    confidence: "2",
+    id: "Calm",
+    createdAt: "2/2 10:34Pm",
+    planned: "YES",
+  },
+  {
+    name: "USD/JPY",
+    calories: "BUY",
+    fat: "Engulfing",
+    carb: "W1, H4, H1",
+    confidence: "2",
+    id: "Calm",
+    createdAt: "2/2 10:34Pm",
+    planned: "YES",
+  },
+  {
+    name: "USD/JPY",
+    calories: "BUY",
+    fat: "Engulfing",
+    carb: "W1, H4, H1",
+    confidence: "2",
+    id: "Calm",
+    createdAt: "2/2 10:34Pm",
+    planned: "YES",
+  },
 ];
 
 export const PendingOrderTable = () => {
   const { control, watch, setValue } = useForm<FormValues>({
     defaultValues: {
-      pendingOrders: [{ name: "ed", calories: "3", carb: "", fat: "", id: "" }],
+      pendingOrders: [
+        { name: "ed", calories: "3", carb: "", fat: "", id: "", planned: "" },
+      ],
     },
   });
 
@@ -63,25 +96,45 @@ export const PendingOrderTable = () => {
         <Table aria-label="customized table">
           <TableHead>
             <TableRow>
-              <TableCell>Name</TableCell>
-              <TableCell align="right">Calories</TableCell>
-              <TableCell align="right">Fat&nbsp;(g)</TableCell>
-              <TableCell align="right">Carbs&nbsp;(g)</TableCell>
-              <TableCell align="right">Protein&nbsp;(g)</TableCell>
+              <TableCell align="center">Currency</TableCell>
+              <TableCell align="center">Date / Time</TableCell>
+              <TableCell align="center">Buy/Sell</TableCell>
+              <TableCell align="center">Confirmation Candle</TableCell>
+              <TableCell align="center">Time Frame</TableCell>
+              <TableCell align="center">Confidence</TableCell>
+              <TableCell align="center">Mood</TableCell>
+              <TableCell align="center">Did you follow your plan?</TableCell>
+              <TableCell align="center">Actions</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {pendingOrders.map(({ calories, carb, fat, id, name }) => (
-              <StyledTableRow key={id}>
-                <TableCell component="th" scope="row">
-                  {id}
-                </TableCell>
-                <TableCell align="right">{calories}</TableCell>
-                <TableCell align="right">{carb}</TableCell>
-                <TableCell align="right">{fat}</TableCell>
-                <TableCell align="right">{name}</TableCell>
-              </StyledTableRow>
-            ))}
+            {pendingOrders.map(
+              ({
+                calories,
+                carb,
+                fat,
+                id,
+                name,
+                createdAt,
+                confidence,
+                planned,
+              }) => (
+                <StyledTableRow key={id}>
+                  <TableCell align="center">{name}</TableCell>
+                  <TableCell align="center">{createdAt}</TableCell>
+                  <TableCell align="center">{calories}</TableCell>
+                  <TableCell align="center">{fat}</TableCell>
+                  <TableCell align="center">{carb}</TableCell>
+                  <TableCell align="center">{confidence}</TableCell>
+                  <TableCell align="center">{id}</TableCell>
+                  <TableCell align="center">{planned}</TableCell>
+                  <TableCell align="center">
+                    <Button>Add</Button>
+                    <Button>Cancel</Button>
+                  </TableCell>
+                </StyledTableRow>
+              )
+            )}
           </TableBody>
         </Table>
       </TableContainer>
