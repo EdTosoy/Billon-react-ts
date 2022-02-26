@@ -7,8 +7,9 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import { useFormContext } from "react-hook-form";
+import { useFieldArray, useFormContext } from "react-hook-form";
 import { IOngoinTradesTable } from "./types";
+import { TRADING_TOOLS_FIELD_NAME } from "constants/index";
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
   "&:nth-of-type(odd)": {
@@ -27,19 +28,21 @@ const dataSource = [
 ];
 
 export const OnGoingTradeTable = () => {
-  const { watch, setValue } = useFormContext();
+  const { watch, setValue, control } = useFormContext();
 
-  // const { fields } = useFieldArray({
-  //   control, // control props comes from useForm (optional: if you are using FormContext)
-  //   name: "onGoingTrades", // unique name for your Field Array
-  // });
-  const onGoingTrades: Array<IOngoinTradesTable> = watch("onGoingTrades");
+  const { fields } = useFieldArray({
+    control,
+    name: TRADING_TOOLS_FIELD_NAME.onGoingTrades,
+  });
+  const onGoingTrades: Array<IOngoinTradesTable> = watch(
+    TRADING_TOOLS_FIELD_NAME.onGoingTrades
+  );
 
   useEffect(() => {
-    setValue("onGoingTrades", dataSource);
+    setValue(TRADING_TOOLS_FIELD_NAME.onGoingTrades, dataSource);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
+  console.log(fields);
   return (
     <Box>
       <TableContainer sx={{ borderRadius: 2, height: 240 }}>

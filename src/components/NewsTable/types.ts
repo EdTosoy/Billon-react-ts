@@ -1,6 +1,3 @@
-export interface INewsTableFormValues {
-  news: INews[] | null;
-}
 export interface INews {
   currency: string;
   type:

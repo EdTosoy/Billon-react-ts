@@ -2,8 +2,9 @@ import React, { useEffect } from "react";
 import Box from "@mui/material/Box";
 import { List, ListItem, ListItemIcon, Typography } from "@mui/material";
 import FolderIcon from "@mui/icons-material/Folder";
-import { useForm } from "react-hook-form";
-import { INews, INewsTableFormValues } from "./types";
+import { useFormContext } from "react-hook-form";
+import { INews } from "./types";
+import { TRADING_TOOLS_FIELD_NAME } from "constants/index";
 
 const newsData: Array<INews> = [
   { currency: "USD", type: "success" },
@@ -18,19 +19,15 @@ const newsData: Array<INews> = [
   { currency: "USD", type: "disabled" },
 ];
 export const NewsTable = () => {
-  const { watch, setValue } = useForm<INewsTableFormValues>({
-    defaultValues: {
-      news: null,
-    },
-  });
+  const { watch, setValue } = useFormContext();
 
   // FOREX FACTORY JSON
   // https://nfs.faireconomy.media/ff_calendar_thisweek.json
 
-  const news = watch("news");
+  const news: Array<INews> = watch(TRADING_TOOLS_FIELD_NAME.news);
 
   useEffect(() => {
-    setValue("news", newsData);
+    setValue(TRADING_TOOLS_FIELD_NAME.news, newsData);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

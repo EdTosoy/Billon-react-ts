@@ -1,6 +1,7 @@
 import React from "react";
 import Box from "@mui/material/Box";
 import { FormInputText } from "components";
+import { TRADE_CALCULATOR_FIELD_NAME } from "constants/index";
 
 export const TradeCalculator = () => {
   return (
@@ -12,8 +13,11 @@ export const TradeCalculator = () => {
           justifyContent: "space-between",
         }}
       >
-        <FormInputText name="atr" label="ATR" />
-        <FormInputText name="stockastic" label="Stockastic" />
+        <FormInputText name={TRADE_CALCULATOR_FIELD_NAME.atr} label="ATR" />
+        <FormInputText
+          name={TRADE_CALCULATOR_FIELD_NAME.stockastic}
+          label="Stockastic"
+        />
       </Box>
       <Box
         sx={{
@@ -24,8 +28,11 @@ export const TradeCalculator = () => {
           borderBottom: "1px solid #F3F7FF",
         }}
       >
-        <FormInputText name="atr" label="ATR" />
-        <FormInputText name="stockastic" label="Stockastic" />
+        <FormInputText name={TRADE_CALCULATOR_FIELD_NAME.atr} label="ATR" />
+        <FormInputText
+          name={TRADE_CALCULATOR_FIELD_NAME.stockastic}
+          label="Stockastic"
+        />
       </Box>
       <Box
         sx={{
@@ -35,9 +42,18 @@ export const TradeCalculator = () => {
           borderBottom: "1px solid #F3F7FF",
         }}
       >
-        <FormInputText name="entryPrice" label="Entry Price" />
-        <FormInputText name="stopLoss" label="Stop Loss (SL)" />
-        <FormInputText name="takeProfit" label="Take profit (TP))" />
+        <FormInputText
+          name={TRADE_CALCULATOR_FIELD_NAME.entryPrice}
+          label="Entry Price"
+        />
+        <FormInputText
+          name={TRADE_CALCULATOR_FIELD_NAME.stopLoss}
+          label="Stop Loss (SL)"
+        />
+        <FormInputText
+          name={TRADE_CALCULATOR_FIELD_NAME.takeProfit}
+          label="Take profit (TP))"
+        />
       </Box>
     </Box>
   );

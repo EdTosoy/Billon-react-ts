@@ -32,6 +32,7 @@ interface IFormInputs {
   atr?: number | string;
   pendingOrders: any;
   onGoingTrades: any;
+  news: any;
 }
 export const TradingTools = () => {
   const formMethods = useForm<IFormInputs>({
