@@ -10,6 +10,7 @@ import { NewsTable } from "components/NewsTable";
 import { OnGoingTradeTable } from "components/OnGoingTradeTable";
 import { PendingOrderTable } from "components/PendingOrderTable";
 import { TradingTimeSessionTable } from "components/TradingTimeSessionTable";
+import { createOrderDefaultValues } from "./defaultValues";
 
 const Item = styled(Paper)(({ theme, padding }: any) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -21,7 +22,7 @@ const Item = styled(Paper)(({ theme, padding }: any) => ({
   height: "100%",
 }));
 
-interface IFormInputs {
+interface ICreateOrder {
   lotSize: number | string;
   numberOfPips: number | string;
   profit: number | string;
@@ -30,21 +31,18 @@ interface IFormInputs {
   takeProfit?: number | string;
   stockastic?: number | string;
   atr?: number | string;
+}
+
+interface IFormInputs {
   pendingOrders: any;
   onGoingTrades: any;
   news: any;
+  createOrder: ICreateOrder;
 }
 export const TradingTools = () => {
   const formMethods = useForm<IFormInputs>({
     defaultValues: {
-      lotSize: "",
-      numberOfPips: "",
-      profit: "",
-      entryPrice: "",
-      stopLoss: "",
-      takeProfit: "",
-      stockastic: "",
-      atr: "",
+      createOrder: createOrderDefaultValues,
       pendingOrders: [],
       onGoingTrades: [],
     },
@@ -55,10 +53,10 @@ export const TradingTools = () => {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <FormProvider {...formMethods}>
-        <Grid container spacing={2} columns={{ xs: 4, sm: 8, md: 12 }}>
-          <Grid item xs={2} sm={4} md={5.5} key={2}>
-            <Item padding={2}>
-              <form>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <Grid container spacing={2} columns={{ xs: 4, sm: 8, md: 12 }}>
+            <Grid item xs={2} sm={4} md={5.5} key={2}>
+              <Item padding={2}>
                 <ProfitCalculator />
                 <TradeCalculator />
                 <Box sx={{ display: "flex", justifyContent: "end" }}>
@@ -78,40 +76,44 @@ export const TradingTools = () => {
                     Submit
                   </Button>
                 </Box>
-              </form>
-            </Item>
-          </Grid>
-          <Grid item xs={2} sm={4} md={6.5} key={2}>
-            <Grid container spacing={2} columns={{ xs: 4, sm: 8, md: 12 }}>
-              <Grid item xs={2} sm={4} md={12} key={2}>
-                <Grid container spacing={2} columns={{ xs: 4, sm: 8, md: 12 }}>
-                  <Grid item xs={2} sm={6} md={6} key={2}>
-                    <Item padding={0}>
-                      <TradingTimeSessionTable />
-                    </Item>
-                  </Grid>
-                  <Grid item xs={2} sm={4} md={6} key={2}>
-                    <Item padding={0}>
-                      <NewsTable />
-                    </Item>
+              </Item>
+            </Grid>
+            <Grid item xs={2} sm={4} md={6.5} key={2}>
+              <Grid container spacing={2} columns={{ xs: 4, sm: 8, md: 12 }}>
+                <Grid item xs={2} sm={4} md={12} key={2}>
+                  <Grid
+                    container
+                    spacing={2}
+                    columns={{ xs: 4, sm: 8, md: 12 }}
+                  >
+                    <Grid item xs={2} sm={6} md={6} key={2}>
+                      <Item padding={0}>
+                        <TradingTimeSessionTable />
+                      </Item>
+                    </Grid>
+                    <Grid item xs={2} sm={4} md={6} key={2}>
+                      <Item padding={0}>
+                        <NewsTable />
+                      </Item>
+                    </Grid>
                   </Grid>
                 </Grid>
+                <Grid item xs={2} sm={4} md={12} key={2}>
+                  <Item padding={2}>
+                    <OnGoingTradeTable />
+                  </Item>
+                </Grid>
               </Grid>
+            </Grid>
+            <Grid item xs={2} sm={4} md={12} key={2}>
               <Grid item xs={2} sm={4} md={12} key={2}>
                 <Item padding={2}>
-                  <OnGoingTradeTable />
+                  <PendingOrderTable />
                 </Item>
               </Grid>
             </Grid>
           </Grid>
-          <Grid item xs={2} sm={4} md={12} key={2}>
-            <Grid item xs={2} sm={4} md={12} key={2}>
-              <Item padding={2}>
-                <PendingOrderTable />
-              </Item>
-            </Grid>
-          </Grid>
-        </Grid>
+        </form>
       </FormProvider>
     </Box>
   );

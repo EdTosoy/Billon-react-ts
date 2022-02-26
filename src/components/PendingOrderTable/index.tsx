@@ -1,6 +1,6 @@
 /* eslint-disable no-sparse-arrays */
 import React, { useEffect } from "react";
-import { Box, Button } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -15,21 +15,43 @@ import {
   PENDING_ORDER_TABLE_FIELD_NAME,
   TRADING_TOOLS_FIELD_NAME,
 } from "constants/index";
+import { FormInputTextField } from "components";
+import {
+  confidenceLevelLOV,
+  confirmationCandleLOV,
+  interrogativeLOV,
+  marketOrderLOV,
+  moodLOV,
+  timeFrameLOV,
+} from "./sampleData";
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
   "&:nth-of-type(odd)": {
     backgroundColor: theme.palette.action.hover,
   },
+  "&:nth-of-type(even)": {
+    backgroundColor: theme.palette.action.selected,
+  },
   // hide last border
   "&:last-child td, &:last-child th": {
     border: 0,
+  },
+  "& th , & td": {
+    padding: 10,
+    "> div ": { width: "100%", padding: 0 },
+    " & .MuiSelect-select ": {
+      padding: "8.5px 8px",
+    },
   },
 }));
 
 const dataSource: IPendingOrderTable[] = [
   {
     currencyPair: "USD/JPY",
-    createdAt: "dd/mm/yy hh:mm",
+    createdAt: {
+      time: "2:330px",
+      date: "23/3/44",
+    },
     marketOrder: "Buy limit",
     confirmationCandle: "engulfing",
     timeFrame: "h4, h1, m30",
@@ -40,24 +62,16 @@ const dataSource: IPendingOrderTable[] = [
   },
   {
     currencyPair: "USD/JPY",
-    createdAt: "dd/mm/yy hh:mm",
+    createdAt: {
+      time: "2:330px",
+      date: "23/3/44",
+    },
     marketOrder: "Buy limit",
     confirmationCandle: "engulfing",
     timeFrame: "h4, h1, m30",
+    mood: "Calm",
     confidence: "5",
     didFollowThePlan: true,
-    mood: "Calm",
-    actions: "string",
-  },
-  {
-    currencyPair: "USD/JPY",
-    createdAt: "dd/mm/yy hh:mm",
-    marketOrder: "Buy limit",
-    confirmationCandle: "engulfing",
-    timeFrame: "h4, h1, m30",
-    confidence: "5",
-    didFollowThePlan: true,
-    mood: "Calm",
     actions: "string",
   },
 ];
@@ -85,15 +99,31 @@ export const PendingOrderTable = () => {
         <Table aria-label="customized table">
           <TableHead>
             <TableRow>
-              <TableCell align="center">Currency</TableCell>
-              <TableCell align="center">Date / Time</TableCell>
-              <TableCell align="center">Buy/Sell</TableCell>
-              <TableCell align="center">Confirmation Candle</TableCell>
-              <TableCell align="center">Time Frame</TableCell>
-              <TableCell align="center">Confidence</TableCell>
-              <TableCell align="center">Mood</TableCell>
-              <TableCell align="center">Did you follow your plan?</TableCell>
-              <TableCell align="center">Actions</TableCell>
+              <TableCell align="center" width={"10%"}>
+                Currency Pair
+              </TableCell>
+              <TableCell align="center">Created At</TableCell>
+              <TableCell align="center" width={"10%"}>
+                Buy/Sell
+              </TableCell>
+              <TableCell align="center" width={"17%"}>
+                Confirmation Candle
+              </TableCell>
+              <TableCell align="center" width={"12%"}>
+                Time Frame
+              </TableCell>
+              <TableCell align="center" width={"5%"}>
+                Confidence
+              </TableCell>
+              <TableCell align="center" width={"10%"}>
+                Mood
+              </TableCell>
+              <TableCell align="center" width={"10%"}>
+                Mate Strategy?
+              </TableCell>
+              <TableCell align="center" width={"10%"}>
+                Actions
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -101,7 +131,7 @@ export const PendingOrderTable = () => {
               (
                 {
                   currencyPair,
-                  createdAt,
+                  createdAt: { time, date },
                   marketOrder,
                   confirmationCandle,
                   timeFrame,
@@ -113,47 +143,66 @@ export const PendingOrderTable = () => {
                 key
               ) => (
                 <StyledTableRow key={key}>
-                  <TableCell align="center">{currencyPair}</TableCell>
-                  <TableCell align="center">{createdAt}</TableCell>
                   <TableCell align="center">
+                    <FormInputTextField
+                      name={PENDING_ORDER_TABLE_FIELD_NAME.currencyPair}
+                    />
+                  </TableCell>
+                  <TableCell align="center">
+                    <Box>
+                      <Typography variant="body1">{time ?? "44"}</Typography>
+                      <Typography variant="caption">{date ?? "44"}</Typography>
+                    </Box>
+                  </TableCell>
+                  <TableCell>
                     <FormInputDropdown
                       name={PENDING_ORDER_TABLE_FIELD_NAME.marketOrder}
-                      label="Market Order"
+                      listOfValues={marketOrderLOV}
                     />
                   </TableCell>
-                  <TableCell align="center">
+                  <TableCell>
                     <FormInputDropdown
                       name={PENDING_ORDER_TABLE_FIELD_NAME.confirmationCandle}
-                      label="Confirmation Candle"
+                      listOfValues={confirmationCandleLOV}
                     />
                   </TableCell>
-                  <TableCell align="center">
+                  <TableCell>
                     <FormInputDropdown
                       name={PENDING_ORDER_TABLE_FIELD_NAME.timeFrame}
-                      label="Time Frame"
+                      listOfValues={timeFrameLOV}
                     />
                   </TableCell>
-                  <TableCell align="center">
+                  <TableCell>
                     <FormInputDropdown
                       name={PENDING_ORDER_TABLE_FIELD_NAME.confidence}
-                      label="Confidence"
+                      listOfValues={confidenceLevelLOV}
                     />
                   </TableCell>
-                  <TableCell align="center">
+                  <TableCell>
                     <FormInputDropdown
                       name={PENDING_ORDER_TABLE_FIELD_NAME.mood}
-                      label="Mood"
+                      listOfValues={moodLOV}
                     />
                   </TableCell>
-                  <TableCell align="center">
+                  <TableCell>
                     <FormInputDropdown
                       name={PENDING_ORDER_TABLE_FIELD_NAME.didFollowThePlan}
-                      label="YES"
+                      listOfValues={interrogativeLOV}
                     />
                   </TableCell>
-                  <TableCell align="center">
-                    <Button>Add</Button>
-                    <Button>Cancel</Button>
+                  <TableCell align="right">
+                    <Box
+                      sx={{
+                        display: "flex",
+                        gap: 2,
+                        justifyContent: "center",
+                      }}
+                    >
+                      <Button variant="contained" color="primary">
+                        Add
+                      </Button>
+                      <Button variant="outlined">Cancel</Button>
+                    </Box>
                   </TableCell>
                 </StyledTableRow>
               )

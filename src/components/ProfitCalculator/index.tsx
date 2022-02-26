@@ -6,11 +6,8 @@ import { PROFIT_CALCULATOR_FIELD_NAME } from "constants/index";
 
 export const ProfitCalculator = () => {
   const { watch } = useFormContext();
-  const [lotSize, numberOfPips] = watch([
-    PROFIT_CALCULATOR_FIELD_NAME.lotSize,
-    PROFIT_CALCULATOR_FIELD_NAME.numberOfPips,
-  ]);
-  const profit = numberOfPips * lotSize || "";
+  const [numberOfPips] = watch([PROFIT_CALCULATOR_FIELD_NAME.numberOfPips]);
+  const profit = numberOfPips * 3 || "";
   return (
     <Box
       sx={{
@@ -21,7 +18,7 @@ export const ProfitCalculator = () => {
       }}
     >
       <FormInputText
-        name={PROFIT_CALCULATOR_FIELD_NAME.lotSize}
+        name={`createOrder.${PROFIT_CALCULATOR_FIELD_NAME.lotSize}`}
         label="Lot size"
       />
       <Box>X</Box>

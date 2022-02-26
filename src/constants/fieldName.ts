@@ -15,6 +15,10 @@ export const PENDING_ORDER_TABLE_FIELD_NAME = {
   timeFrame: "timeFrame",
 };
 
+export const ON_GOING_TRADE_TABLE_FIELD_NAME = {
+  result: "result",
+  profit: "profit",
+};
 export const PROFIT_CALCULATOR_FIELD_NAME = {
   lotSize: "lotSize",
   numberOfPips: "numberOfPips",

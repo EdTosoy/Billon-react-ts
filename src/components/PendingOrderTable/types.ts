@@ -1,6 +1,10 @@
+interface IcreatedAt {
+  date: string;
+  time: string;
+}
 export interface IPendingOrderTable {
   currencyPair: string;
-  createdAt: string;
+  createdAt: IcreatedAt;
   marketOrder: string;
   confirmationCandle: string;
   timeFrame: string;

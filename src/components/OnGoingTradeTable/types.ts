@@ -1,7 +1,7 @@
 export interface IOngoinTradesTable {
-  name: string;
-  calories: string;
-  fat: string;
-  carb: string;
+  currencyPair: string;
+  createAt: string;
+  marketOrder: string;
+  profit: string;
   id: string;
 }

@@ -3,35 +3,46 @@ import { MenuItem, FormControl, InputLabel, Select } from "@mui/material";
 
 import { useFormContext, Controller } from "react-hook-form";
 
-const options = [
-  {
-    label: "Dropdown Option 1",
-    value: "1",
-  },
-  {
-    label: "Dropdown Option 2",
-    value: "2",
-  },
-];
-
-export const FormInputDropdown: React.FC<any> = ({ name, label }) => {
+interface listOfValues {
+  id: string | number;
+  referenceName?: string;
+  referenceCode?: string;
+  displayValue?: string;
+}
+interface IFormInputDropdown {
+  name: string;
+  label?: string;
+  listOfValues?: Array<listOfValues>;
+}
+export const FormInputDropdown: React.FC<IFormInputDropdown> = ({
+  name,
+  label,
+  listOfValues,
+}) => {
   const { control } = useFormContext();
   const generateSingleOptions = () => {
-    return options.map((option: any) => {
+    return listOfValues?.map((value: listOfValues) => {
+      const { id, referenceName, displayValue } = value;
       return (
-        <MenuItem key={option.value} value={option.value}>
-          {option.label}
+        <MenuItem key={id} value={referenceName}>
+          {displayValue}
         </MenuItem>
       );
     });
   };
 
   return (
-    <FormControl size={"small"}>
-      <InputLabel>{label}</InputLabel>
+    <FormControl>
+      {label && <InputLabel>{label}</InputLabel>}
       <Controller
         render={({ field: { onChange, value } }) => (
-          <Select onChange={onChange} value={value}>
+          <Select
+            // size="small"
+            onChange={onChange}
+            value={value}
+            fullWidth
+            sx={{ backgroundColor: "white" }}
+          >
             {generateSingleOptions()}
           </Select>
         )}

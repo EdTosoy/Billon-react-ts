@@ -22,6 +22,7 @@ export const FormInputText = ({ name, label, options }: IFormInputText) => {
           fullWidth
           label={label}
           variant="outlined"
+          autoComplete="off"
           {...options}
         />
       )}
