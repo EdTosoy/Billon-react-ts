@@ -18,13 +18,10 @@ import IconButton from "@mui/material/IconButton";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { Link } from "react-router-dom";
 import Grid from "@mui/material/Grid";
+import { SideMenuProps } from "./types";
 
 const drawerWidth = 300;
 
-interface SideMenuProps {
-  component?: JSX.Element;
-  children?: React.ReactNode;
-}
 export function SideMenu(props: SideMenuProps) {
   const { component, children } = props;
   return (

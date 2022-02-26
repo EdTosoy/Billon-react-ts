@@ -1,14 +1,14 @@
 import React, { useEffect } from "react";
-import { Box, Button, TextField } from "@mui/material";
+import { Box } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
-import TableCell, { tableCellClasses } from "@mui/material/TableCell";
+import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
-import { useFieldArray, useForm, useFormContext } from "react-hook-form";
+import { useFormContext } from "react-hook-form";
+import { IOngoinTradesTable } from "./types";
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
   "&:nth-of-type(odd)": {
@@ -20,17 +20,6 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-interface IOngoinTradesTable {
-  name: string;
-  calories: string;
-  fat: string;
-  carb: string;
-  id: string;
-}
-type FormValues = {
-  onGoingTrades: IOngoinTradesTable[];
-};
-
 const dataSource = [
   { name: "yo", calories: "yo", fat: "yo", carb: "yo", id: "yo" },
   { name: "yo", calories: "yo", fat: "yo", carb: "yo", id: "yo" },
@@ -38,24 +27,18 @@ const dataSource = [
 ];
 
 export const OnGoingTradeTable = () => {
-  const { control, watch, setValue } = useForm<FormValues>({
-    defaultValues: {
-      onGoingTrades: [{ name: "ed", calories: "3", carb: "", fat: "", id: "" }],
-    },
-  });
+  const { watch, setValue } = useFormContext();
 
-  const { fields } = useFieldArray({
-    control, // control props comes from useForm (optional: if you are using FormContext)
-    name: "onGoingTrades", // unique name for your Field Array
-  });
+  // const { fields } = useFieldArray({
+  //   control, // control props comes from useForm (optional: if you are using FormContext)
+  //   name: "onGoingTrades", // unique name for your Field Array
+  // });
   const onGoingTrades: Array<IOngoinTradesTable> = watch("onGoingTrades");
 
   useEffect(() => {
     setValue("onGoingTrades", dataSource);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  console.log(fields);
-
-  const onSubmit = (data: any) => console.log("data", data);
 
   return (
     <Box>

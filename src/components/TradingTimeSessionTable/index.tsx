@@ -1,39 +1,6 @@
 import React from "react";
-import {
-  Box,
-  Button,
-  CardMedia,
-  Paper,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  Typography,
-} from "@mui/material";
-import { DataGrid } from "@mui/x-data-grid";
-//@ts-ignore
-import logo from "./timesession.png";
+import { Box, Paper, Typography } from "@mui/material";
 export const TradingTimeSessionTable = () => {
-  const Block = ({ content }: any) => (
-    <Box
-      sx={{
-        border: "1px solid black",
-        height: 25,
-        width: 25,
-      }}
-    >
-      {content}
-    </Box>
-  );
-  const columns = [
-    { field: "id" },
-    { field: "username", width: 150 },
-    { field: "age", width: 80, type: "number" },
-  ];
-  const rows = [{ id: "3", username: "ed", age: 42 }];
-
   const tradingSessions = [
     {
       marketName: "SYDNEY",
@@ -58,8 +25,6 @@ export const TradingTimeSessionTable = () => {
   ];
   return (
     <Box>
-      {/* <CardMedia component="img" height="194" image={logo} alt="Paella dish" /> */}
-
       {tradingSessions.map(({ marketName, currencies, isActive }) => (
         <Paper
           elevation={isActive ? 2 : 0}

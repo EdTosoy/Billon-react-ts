@@ -1,15 +1,16 @@
 /* eslint-disable no-sparse-arrays */
 import React, { useEffect } from "react";
-import { Box, Button, TextField } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
-import TableCell, { tableCellClasses } from "@mui/material/TableCell";
+import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
-import { useFieldArray, useForm, useFormContext } from "react-hook-form";
+import { FormInputDropdown } from "components/FormComponents/Components/FormInputDropdown";
+import { useFormContext, useFieldArray } from "react-hook-form";
+import { IPendingOrderTable } from "./types";
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
   "&:nth-of-type(odd)": {
@@ -21,74 +22,56 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-interface IOngoinTradesTable {
-  name: string;
-  calories: string;
-  fat: string;
-  carb: string;
-  id: string;
-  planned: string;
-  createdAt: string;
-  confidence: string;
-}
-type FormValues = {
-  pendingOrders: IOngoinTradesTable[];
-};
-
-const dataSource = [
+const dataSource: IPendingOrderTable[] = [
   {
-    name: "USD/JPY",
-    calories: "BUY",
-    fat: "Engulfing",
-    carb: "W1, H4, H1",
-    confidence: "2",
-    id: "Calm",
-    createdAt: "2/2 10:34Pm",
-    planned: "YES",
+    currencyPair: "USD/JPY",
+    createdAt: "dd/mm/yy hh:mm",
+    marketOrder: "Buy limit",
+    confirmationCandle: "engulfing",
+    timeFrame: "h4, h1, m30",
+    mood: "Calm",
+    confidence: "5",
+    didFollowThePlan: true,
+    actions: "string",
   },
   {
-    name: "USD/JPY",
-    calories: "BUY",
-    fat: "Engulfing",
-    carb: "W1, H4, H1",
-    confidence: "2",
-    id: "Calm",
-    createdAt: "2/2 10:34Pm",
-    planned: "YES",
+    currencyPair: "USD/JPY",
+    createdAt: "dd/mm/yy hh:mm",
+    marketOrder: "Buy limit",
+    confirmationCandle: "engulfing",
+    timeFrame: "h4, h1, m30",
+    confidence: "5",
+    didFollowThePlan: true,
+    mood: "Calm",
+    actions: "string",
   },
   {
-    name: "USD/JPY",
-    calories: "BUY",
-    fat: "Engulfing",
-    carb: "W1, H4, H1",
-    confidence: "2",
-    id: "Calm",
-    createdAt: "2/2 10:34Pm",
-    planned: "YES",
+    currencyPair: "USD/JPY",
+    createdAt: "dd/mm/yy hh:mm",
+    marketOrder: "Buy limit",
+    confirmationCandle: "engulfing",
+    timeFrame: "h4, h1, m30",
+    confidence: "5",
+    didFollowThePlan: true,
+    mood: "Calm",
+    actions: "string",
   },
 ];
 
 export const PendingOrderTable = () => {
-  const { control, watch, setValue } = useForm<FormValues>({
-    defaultValues: {
-      pendingOrders: [
-        { name: "ed", calories: "3", carb: "", fat: "", id: "", planned: "" },
-      ],
-    },
-  });
+  const { control, watch, setValue } = useFormContext();
 
   const { fields } = useFieldArray({
     control, // control props comes from useForm (optional: if you are using FormContext)
     name: "pendingOrders", // unique name for your Field Array
   });
-  const pendingOrders: Array<IOngoinTradesTable> = watch("pendingOrders");
+  const pendingOrders: Array<IPendingOrderTable> = watch("pendingOrders");
 
   useEffect(() => {
     setValue("pendingOrders", dataSource);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   console.log(fields);
-
-  const onSubmit = (data: any) => console.log("data", data);
 
   return (
     <Box>
@@ -109,25 +92,47 @@ export const PendingOrderTable = () => {
           </TableHead>
           <TableBody>
             {pendingOrders.map(
-              ({
-                calories,
-                carb,
-                fat,
-                id,
-                name,
-                createdAt,
-                confidence,
-                planned,
-              }) => (
-                <StyledTableRow key={id}>
-                  <TableCell align="center">{name}</TableCell>
+              (
+                {
+                  currencyPair,
+                  createdAt,
+                  marketOrder,
+                  confirmationCandle,
+                  timeFrame,
+                  confidence,
+                  mood,
+                  didFollowThePlan,
+                  actions,
+                },
+                key
+              ) => (
+                <StyledTableRow key={key}>
+                  <TableCell align="center">{currencyPair}</TableCell>
                   <TableCell align="center">{createdAt}</TableCell>
-                  <TableCell align="center">{calories}</TableCell>
-                  <TableCell align="center">{fat}</TableCell>
-                  <TableCell align="center">{carb}</TableCell>
-                  <TableCell align="center">{confidence}</TableCell>
-                  <TableCell align="center">{id}</TableCell>
-                  <TableCell align="center">{planned}</TableCell>
+                  <TableCell align="center">
+                    <FormInputDropdown
+                      name="marketOrder"
+                      label="Market Order"
+                    />
+                  </TableCell>
+                  <TableCell align="center">
+                    <FormInputDropdown
+                      name="confirmationCandle"
+                      label="Confirmation Candle"
+                    />
+                  </TableCell>
+                  <TableCell align="center">
+                    <FormInputDropdown name="timeFrame" label="Time Frame" />
+                  </TableCell>
+                  <TableCell align="center">
+                    <FormInputDropdown name="confidence" label="Confidence" />
+                  </TableCell>
+                  <TableCell align="center">
+                    <FormInputDropdown name="mood" label="Mood" />
+                  </TableCell>
+                  <TableCell align="center">
+                    <FormInputDropdown name="didFollowThePlan" label="YES" />
+                  </TableCell>
                   <TableCell align="center">
                     <Button>Add</Button>
                     <Button>Cancel</Button>

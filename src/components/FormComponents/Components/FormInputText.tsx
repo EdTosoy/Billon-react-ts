@@ -1,11 +1,7 @@
 import React from "react";
-import TextField, { TextFieldProps } from "@mui/material/TextField";
+import TextField from "@mui/material/TextField";
 import { Controller, useFormContext } from "react-hook-form";
-interface IFormInputText {
-  name: string;
-  label?: string;
-  options?: TextFieldProps;
-}
+import { IFormInputText } from "./types";
 
 export const FormInputText = ({ name, label, options }: IFormInputText) => {
   const { control } = useFormContext();

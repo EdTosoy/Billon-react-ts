@@ -1,16 +1,9 @@
 import Box from "@mui/material/Box";
-import React, { useState } from "react";
+import React from "react";
 import Grid from "@mui/material/Grid";
 import styled from "@emotion/styled";
 import { FormProvider, useForm } from "react-hook-form";
-import {
-  Paper,
-  Button,
-  List,
-  ListItem,
-  Typography,
-  ListItemText,
-} from "@mui/material";
+import { Paper, Button } from "@mui/material";
 import { ProfitCalculator } from "components/ProfitCalculator";
 import { TradeCalculator } from "components";
 import { NewsTable } from "components/NewsTable";
@@ -37,6 +30,8 @@ interface IFormInputs {
   takeProfit?: number | string;
   stockastic?: number | string;
   atr?: number | string;
+  pendingOrders: any;
+  onGoingTrades: any;
 }
 export const TradingTools = () => {
   const formMethods = useForm<IFormInputs>({
@@ -49,6 +44,8 @@ export const TradingTools = () => {
       takeProfit: "",
       stockastic: "",
       atr: "",
+      pendingOrders: [],
+      onGoingTrades: [],
     },
   });
   const { handleSubmit, reset } = formMethods;
@@ -56,9 +53,9 @@ export const TradingTools = () => {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <Grid container spacing={2} columns={{ xs: 4, sm: 8, md: 12 }}>
-        <Grid item xs={2} sm={4} md={5.5} key={2}>
-          <FormProvider {...formMethods}>
+      <FormProvider {...formMethods}>
+        <Grid container spacing={2} columns={{ xs: 4, sm: 8, md: 12 }}>
+          <Grid item xs={2} sm={4} md={5.5} key={2}>
             <Item padding={2}>
               <form>
                 <ProfitCalculator />
@@ -82,39 +79,39 @@ export const TradingTools = () => {
                 </Box>
               </form>
             </Item>
-          </FormProvider>
-        </Grid>
-        <Grid item xs={2} sm={4} md={6.5} key={2}>
-          <Grid container spacing={2} columns={{ xs: 4, sm: 8, md: 12 }}>
-            <Grid item xs={2} sm={4} md={12} key={2}>
-              <Grid container spacing={2} columns={{ xs: 4, sm: 8, md: 12 }}>
-                <Grid item xs={2} sm={6} md={6} key={2}>
-                  <Item padding={0}>
-                    <TradingTimeSessionTable />
-                  </Item>
-                </Grid>
-                <Grid item xs={2} sm={4} md={6} key={2}>
-                  <Item padding={0}>
-                    <NewsTable />
-                  </Item>
+          </Grid>
+          <Grid item xs={2} sm={4} md={6.5} key={2}>
+            <Grid container spacing={2} columns={{ xs: 4, sm: 8, md: 12 }}>
+              <Grid item xs={2} sm={4} md={12} key={2}>
+                <Grid container spacing={2} columns={{ xs: 4, sm: 8, md: 12 }}>
+                  <Grid item xs={2} sm={6} md={6} key={2}>
+                    <Item padding={0}>
+                      <TradingTimeSessionTable />
+                    </Item>
+                  </Grid>
+                  <Grid item xs={2} sm={4} md={6} key={2}>
+                    <Item padding={0}>
+                      <NewsTable />
+                    </Item>
+                  </Grid>
                 </Grid>
               </Grid>
+              <Grid item xs={2} sm={4} md={12} key={2}>
+                <Item padding={2}>
+                  <OnGoingTradeTable />
+                </Item>
+              </Grid>
             </Grid>
+          </Grid>
+          <Grid item xs={2} sm={4} md={12} key={2}>
             <Grid item xs={2} sm={4} md={12} key={2}>
               <Item padding={2}>
-                <OnGoingTradeTable />
+                <PendingOrderTable />
               </Item>
             </Grid>
           </Grid>
         </Grid>
-        <Grid item xs={2} sm={4} md={12} key={2}>
-          <Grid item xs={2} sm={4} md={12} key={2}>
-            <Item padding={2}>
-              <PendingOrderTable />
-            </Item>
-          </Grid>
-        </Grid>
-      </Grid>
+      </FormProvider>
     </Box>
   );
 };

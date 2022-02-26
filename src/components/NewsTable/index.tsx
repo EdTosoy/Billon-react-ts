@@ -1,34 +1,9 @@
 import React, { useEffect } from "react";
 import Box from "@mui/material/Box";
-import {
-  List,
-  ListItem,
-  ListItemText,
-  ListItemIcon,
-  Typography,
-  Button,
-  ButtonBase,
-} from "@mui/material";
+import { List, ListItem, ListItemIcon, Typography } from "@mui/material";
 import FolderIcon from "@mui/icons-material/Folder";
 import { useForm } from "react-hook-form";
-import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
-interface INewsTableFormValues {
-  news: INews[] | null;
-}
-interface INews {
-  currency: string;
-  type:
-    | "inherit"
-    | "action"
-    | "disabled"
-    | "primary"
-    | "secondary"
-    | "error"
-    | "info"
-    | "success"
-    | "warning";
-}
+import { INews, INewsTableFormValues } from "./types";
 
 const newsData: Array<INews> = [
   { currency: "USD", type: "success" },
