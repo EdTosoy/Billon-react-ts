@@ -1,45 +1,18 @@
 import Box from "@mui/material/Box";
 import React from "react";
 import Grid from "@mui/material/Grid";
-import styled from "@emotion/styled";
 import { FormProvider, useForm } from "react-hook-form";
-import { Paper, Button } from "@mui/material";
+import { Button } from "@mui/material";
 import { ProfitCalculator } from "components/ProfitCalculator";
-import { TradeCalculator } from "components";
+import { Item, TradeCalculator } from "components";
 import { NewsTable } from "components/NewsTable";
 import { OnGoingTradeTable } from "components/OnGoingTradeTable";
 import { PendingOrderTable } from "components/PendingOrderTable";
 import { TradingTimeSessionTable } from "components/TradingTimeSessionTable";
 import { format } from "date-fns";
 import { createOrderDefaultValues } from "./defaultValues";
+import { IFormInputs } from "./types";
 
-const Item = styled(Paper)(({ theme, padding }: any) => ({
-  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
-  ...theme.typography.body2,
-  padding: theme.spacing(padding ?? 4),
-  textAlign: "center",
-  color: theme.palette.text.secondary,
-  borderRadius: 16,
-  height: "100%",
-}));
-
-interface ICreateOrder {
-  lotSize?: number | string;
-  numberOfPips?: number | string;
-  profit?: number | string;
-  entryPrice?: number | string;
-  stopLoss?: number | string;
-  takeProfit?: number | string;
-  stockastic?: number | string;
-  atr?: number | string;
-}
-
-interface IFormInputs {
-  pendingOrders: any;
-  onGoingTrades: any;
-  news: any;
-  createOrder: ICreateOrder | null;
-}
 export const TradingTools = () => {
   const formMethods = useForm<IFormInputs>({
     defaultValues: {

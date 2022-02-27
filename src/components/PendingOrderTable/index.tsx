@@ -1,7 +1,6 @@
 /* eslint-disable no-sparse-arrays */
 import React from "react";
 import { Box, Button, Typography } from "@mui/material";
-import { styled } from "@mui/material/styles";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -23,26 +22,7 @@ import {
   timeFrameLOV,
 } from "./sampleData";
 import { IOngoinTradesTable } from "components/OnGoingTradeTable/types";
-
-const StyledTableRow = styled(TableRow)(({ theme }) => ({
-  "&:nth-of-type(odd)": {
-    backgroundColor: theme.palette.action.hover,
-  },
-  "&:nth-of-type(even)": {
-    backgroundColor: theme.palette.action.selected,
-  },
-  // hide last border
-  "&:last-child td, &:last-child th": {
-    border: 0,
-  },
-  "& th , & td": {
-    padding: 8,
-    "> div ": { width: "100%", padding: 0 },
-    " & .MuiSelect-select ": {
-      padding: "8.5px 8px",
-    },
-  },
-}));
+import { StyledTableRow } from "components/StyledTableRow";
 
 export const PendingOrderTable = () => {
   const { control, watch, setValue } = useFormContext();
