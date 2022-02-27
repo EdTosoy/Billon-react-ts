@@ -29,3 +29,9 @@ export const onGoingTradeDefaultValues = {
   marketOrder: "",
   profit: "",
 };
+
+export const tradingToolDefaultValues = {
+  createOrder: createOrderDefaultValues,
+  pendingOrders: [],
+  onGoingTrades: [],
+};

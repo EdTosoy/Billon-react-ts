@@ -1,4 +1,3 @@
-/* eslint-disable no-sparse-arrays */
 import React from "react";
 import { Box, Button, Typography } from "@mui/material";
 import Table from "@mui/material/Table";
@@ -11,7 +10,7 @@ import { FormInputDropdown } from "components/FormComponents/Components/FormInpu
 import { useFormContext, useFieldArray } from "react-hook-form";
 import { IPendingOrderTable } from "./types";
 import { TRADING_TOOLS_FIELD_NAME } from "constants/index";
-import { FormInputTextField } from "components";
+import { FormInputTextField, StyledTableRow } from "components";
 import {
   confidenceLevelLOV,
   confirmationCandleLOV,
@@ -21,8 +20,6 @@ import {
   moodLOV,
   timeFrameLOV,
 } from "./sampleData";
-import { IOngoinTradesTable } from "components/OnGoingTradeTable/types";
-import { StyledTableRow } from "components/StyledTableRow";
 
 export const PendingOrderTable = () => {
   const { control, watch, setValue } = useFormContext();
@@ -34,9 +31,7 @@ export const PendingOrderTable = () => {
   const pendingOrders: Array<IPendingOrderTable> = watch(
     TRADING_TOOLS_FIELD_NAME.pendingOrders
   );
-  const onGoingTrades: Array<IOngoinTradesTable> = watch(
-    TRADING_TOOLS_FIELD_NAME.onGoingTrades
-  );
+  const onGoingTrades = watch(TRADING_TOOLS_FIELD_NAME.onGoingTrades);
 
   const onAddOrder = (index: any) => {
     setValue(TRADING_TOOLS_FIELD_NAME.onGoingTrades, [

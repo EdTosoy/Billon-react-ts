@@ -3,3 +3,8 @@ export * from "./FormComponents";
 export { TradeCalculator } from "./TradeCalculator/Loadable";
 export { Item } from "./Item/Loadable";
 export { StyledTableRow } from "./StyledTableRow/Loadable";
+export { OrderCalculator } from "./OrderCalculator/Loadable";
+export { TradingTimeSessionTable } from "./TradingTimeSessionTable/Loadable";
+export { OnGoingTradeTable } from "./OnGoingTradeTable/Loadable";
+export { PendingOrderTable } from "./PendingOrderTable/Loadable";
+export { NewsTable } from "./NewsTable/Loadable";
