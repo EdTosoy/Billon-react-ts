@@ -218,3 +218,10 @@ export const resultLOV = [
     referenceName: "Close",
   },
 ];
+
+export const currencyLOV = [
+  { label: "USD/JPY" },
+  { label: "USD/CAD" },
+  { label: "USD/EUR" },
+  { label: "USD/BUS" },
+];

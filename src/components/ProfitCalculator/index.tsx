@@ -1,13 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Box } from "@mui/material";
 import { FormInputText } from "components";
 import { useFormContext } from "react-hook-form";
 import { PROFIT_CALCULATOR_FIELD_NAME } from "constants/index";
 
 export const ProfitCalculator = () => {
-  const { watch } = useFormContext();
-  const [numberOfPips] = watch([PROFIT_CALCULATOR_FIELD_NAME.numberOfPips]);
-  const profit = numberOfPips * 3 || "";
+  const { watch, setValue } = useFormContext();
+  const [numberOfPips, lotSize] = watch([
+    `createOrder.${PROFIT_CALCULATOR_FIELD_NAME.numberOfPips}`,
+    `createOrder.${PROFIT_CALCULATOR_FIELD_NAME.lotSize}`,
+  ]);
+  const profit = numberOfPips * lotSize || "";
+  useEffect(() => {
+    if (profit) setValue("createOrder.profit", profit);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [profit]);
   return (
     <Box
       sx={{
@@ -22,13 +29,10 @@ export const ProfitCalculator = () => {
         label="Lot size"
       />
       <Box>X</Box>
-      <FormInputText
-        name={PROFIT_CALCULATOR_FIELD_NAME.numberOfPips}
-        label="Number of PIPs"
-      />
+      <FormInputText name={"createOrder.numberOfPips"} label="Number of PIPs" />
       <Box>=</Box>
       <FormInputText
-        name={PROFIT_CALCULATOR_FIELD_NAME.profit}
+        name={"createOrder.profit"}
         label="profit"
         options={{ value: profit }}
       />

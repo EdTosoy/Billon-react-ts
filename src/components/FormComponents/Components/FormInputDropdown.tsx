@@ -37,7 +37,7 @@ export const FormInputDropdown: React.FC<IFormInputDropdown> = ({
       <Controller
         render={({ field: { onChange, value } }) => (
           <Select
-            // size="small"
+            size="small"
             onChange={onChange}
             value={value}
             fullWidth

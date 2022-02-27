@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Box, Button, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import Table from "@mui/material/Table";
@@ -9,10 +9,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import { useFieldArray, useFormContext } from "react-hook-form";
 import { IOngoinTradesTable } from "./types";
-import {
-  ON_GOING_TRADE_TABLE_FIELD_NAME,
-  TRADING_TOOLS_FIELD_NAME,
-} from "constants/index";
+import { TRADING_TOOLS_FIELD_NAME } from "constants/index";
 import { FormInputDropdown, FormInputStandard } from "components";
 import { resultLOV } from "components/PendingOrderTable/sampleData";
 
@@ -28,7 +25,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
     border: 0,
   },
   "& th , & td": {
-    padding: 10,
+    padding: 8,
     "> div ": { width: "100%", padding: 0 },
     " & .MuiSelect-select ": {
       padding: "8.5px 8px",
@@ -36,34 +33,10 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-const dataSource = [
-  {
-    id: "1",
-    currencyPair: "USD/JPY",
-    createAt: "yo",
-    marketOrder: "Buy",
-    profit: "5000",
-  },
-  {
-    id: "2",
-    currencyPair: "USD/JPY",
-    createAt: "yo",
-    marketOrder: "Buy",
-    profit: "5000",
-  },
-  {
-    id: "3",
-    currencyPair: "USD/JPY",
-    createAt: "yo",
-    marketOrder: "Buy",
-    profit: "5000",
-  },
-];
-
 export const OnGoingTradeTable = () => {
-  const { watch, setValue, control } = useFormContext();
+  const { watch, control } = useFormContext();
 
-  const { fields } = useFieldArray({
+  const { remove } = useFieldArray({
     control,
     name: TRADING_TOOLS_FIELD_NAME.onGoingTrades,
   });
@@ -71,11 +44,6 @@ export const OnGoingTradeTable = () => {
     TRADING_TOOLS_FIELD_NAME.onGoingTrades
   );
 
-  useEffect(() => {
-    setValue(TRADING_TOOLS_FIELD_NAME.onGoingTrades, dataSource);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-  console.log(fields);
   return (
     <Box>
       <TableContainer sx={{ borderRadius: 2, height: 240 }}>
@@ -96,29 +64,45 @@ export const OnGoingTradeTable = () => {
           </TableHead>
           <TableBody>
             {onGoingTrades.map(
-              ({ currencyPair, createAt, marketOrder, profit, id }) => (
+              (
+                {
+                  currencyPair,
+                  createdAt: { time, date },
+                  marketOrder,
+                  profit,
+                  id,
+                },
+                index
+              ) => (
                 <StyledTableRow key={id}>
-                  <TableCell align="center">{currencyPair}</TableCell>
+                  <TableCell align="center">
+                    <Typography variant="body1">{currencyPair}</Typography>
+                  </TableCell>
                   <TableCell align="center">
                     <Box>
-                      <Typography variant="body1">{"44232"}</Typography>
-                      <Typography variant="caption">{"4432323"}</Typography>
+                      <Typography variant="body1">{time}</Typography>
+                      <Typography variant="caption">{date}</Typography>
                     </Box>
                   </TableCell>
-                  <TableCell align="center">{marketOrder}</TableCell>
+                  <TableCell align="center">
+                    <Typography variant="body1">{marketOrder}</Typography>
+                  </TableCell>
                   <TableCell align="center">
                     <FormInputDropdown
-                      name={ON_GOING_TRADE_TABLE_FIELD_NAME.result}
+                      name={`onGoingTrades.${index}.result`}
                       listOfValues={resultLOV}
                     />
                   </TableCell>
                   <TableCell align="center">
-                    <FormInputStandard
-                      name={ON_GOING_TRADE_TABLE_FIELD_NAME.profit}
-                    />
+                    <FormInputStandard name={`onGoingTrades.${index}.profit`} />
                   </TableCell>
                   <TableCell align="center">
-                    <Button type="submit" variant="contained" color="primary">
+                    <Button
+                      type="submit"
+                      variant="contained"
+                      color="primary"
+                      onClick={() => remove(index)}
+                    >
                       Submit
                     </Button>
                   </TableCell>

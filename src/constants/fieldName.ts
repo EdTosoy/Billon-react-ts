@@ -2,6 +2,7 @@ export const TRADING_TOOLS_FIELD_NAME = {
   pendingOrders: "pendingOrders",
   onGoingTrades: "onGoingTrades",
   news: "news",
+  createOrder: "createOrder",
 };
 
 export const PENDING_ORDER_TABLE_FIELD_NAME = {
