@@ -68,7 +68,7 @@ export const PendingOrderTable = () => {
                 Mood
               </TableCell>
               <TableCell align="center" width={"10%"}>
-                Mate Strategy?
+                Did you follow your plan?
               </TableCell>
               <TableCell align="center" width={"10%"}>
                 Actions

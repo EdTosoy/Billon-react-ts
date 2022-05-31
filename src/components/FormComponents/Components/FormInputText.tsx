@@ -3,7 +3,7 @@ import TextField from "@mui/material/TextField";
 import { Controller, useFormContext } from "react-hook-form";
 import { IFormInputText } from "./types";
 
-export const FormInputText = ({ name, label, options }: IFormInputText) => {
+export const FormInputText = ({ name, label, inputProps }: IFormInputText) => {
   const { control } = useFormContext();
   return (
     <Controller
@@ -23,7 +23,7 @@ export const FormInputText = ({ name, label, options }: IFormInputText) => {
           label={label}
           variant="outlined"
           autoComplete="off"
-          {...options}
+          {...inputProps}
         />
       )}
     />

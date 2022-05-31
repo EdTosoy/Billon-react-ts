@@ -1,8 +1,9 @@
 import React, { useEffect } from "react";
-import { Box } from "@mui/material";
+import { Box, TextField } from "@mui/material";
 import { FormInputText } from "components";
 import { useFormContext } from "react-hook-form";
 import { PROFIT_CALCULATOR_FIELD_NAME } from "constants/index";
+import { FormControl } from "components/FormControl";
 
 export const ProfitCalculator = () => {
   const { watch, setValue } = useFormContext();
@@ -19,6 +20,7 @@ export const ProfitCalculator = () => {
     <Box
       sx={{
         display: "flex",
+        gap: 1,
         alignItems: "center",
         paddingY: 4,
         borderBottom: "1px solid #F3F7FF",
@@ -27,15 +29,23 @@ export const ProfitCalculator = () => {
       <FormInputText
         name={`createOrder.${PROFIT_CALCULATOR_FIELD_NAME.lotSize}`}
         label="Lot size"
+        inputProps={{ inputMode: "numeric", type: "number" }}
       />
-      <Box>X</Box>
-      <FormInputText name={"createOrder.numberOfPips"} label="Number of PIPs" />
-      <Box>=</Box>
+
       <FormInputText
-        name={"createOrder.profit"}
-        label="profit"
-        options={{ value: profit }}
+        name={"createOrder.numberOfPips"}
+        label="Number of PIPs"
+        inputProps={{ type: "number" }}
       />
+
+      <FormControl name={"createOrder.profit"}>
+        <TextField
+          fullWidth
+          variant="outlined"
+          autoComplete="off"
+          label="profit"
+        />
+      </FormControl>
     </Box>
   );
 };

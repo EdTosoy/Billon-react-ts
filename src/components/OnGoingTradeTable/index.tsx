@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Button, MenuItem, Select, Typography } from "@mui/material";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -15,6 +15,7 @@ import {
   StyledTableRow,
 } from "components";
 import { resultLOV } from "components/PendingOrderTable/sampleData";
+import { FormControl } from "components/FormControl";
 
 export const OnGoingTradeTable = () => {
   const { watch, control } = useFormContext();
@@ -26,7 +27,14 @@ export const OnGoingTradeTable = () => {
   const onGoingTrades: Array<IOngoinTradesTable> = watch(
     TRADING_TOOLS_FIELD_NAME.onGoingTrades
   );
+  const submit = (index: number) => {
+    console.log(onGoingTrades[index]);
+  };
 
+  const onResultsChange = (index: number) => {
+    const rowValues = onGoingTrades[index];
+    console.log(rowValues);
+  };
   return (
     <Box>
       <TableContainer sx={{ borderRadius: 2, height: 240 }}>
@@ -71,10 +79,28 @@ export const OnGoingTradeTable = () => {
                     <Typography variant="body1">{marketOrder}</Typography>
                   </TableCell>
                   <TableCell align="center">
-                    <FormInputDropdown
-                      name={`onGoingTrades.${index}.result`}
-                      listOfValues={resultLOV}
-                    />
+                    <FormControl name={`onGoingTrades.${index}.result`}>
+                      {({ onChange }) => (
+                        <Select
+                          size="small"
+                          onChange={() => {
+                            onChange();
+                            onResultsChange(index);
+                          }}
+                          fullWidth
+                          sx={{ backgroundColor: "white" }}
+                        >
+                          {resultLOV?.map((value: any) => {
+                            const { id, referenceName, displayValue } = value;
+                            return (
+                              <MenuItem key={id} value={referenceName}>
+                                {displayValue}
+                              </MenuItem>
+                            );
+                          })}
+                        </Select>
+                      )}
+                    </FormControl>
                   </TableCell>
                   <TableCell align="center">
                     <FormInputStandard name={`onGoingTrades.${index}.profit`} />
@@ -84,7 +110,10 @@ export const OnGoingTradeTable = () => {
                       type="submit"
                       variant="contained"
                       color="primary"
-                      onClick={() => remove(index)}
+                      onClick={() => {
+                        submit(index);
+                        remove(index);
+                      }}
                     >
                       Submit
                     </Button>

@@ -15,7 +15,7 @@ export const OrderCalculator = () => {
   const { watch, reset, setValue, getValues } = useFormContext();
 
   const [createOrder, pendingOrders] = watch([
-    TRADING_TOOLS_FIELD_NAME.pendingOrders,
+    TRADING_TOOLS_FIELD_NAME.createOrder,
     TRADING_TOOLS_FIELD_NAME.pendingOrders,
   ]);
 
@@ -45,7 +45,7 @@ export const OrderCalculator = () => {
       <Box sx={{ display: "flex", justifyContent: "end" }}>
         <Button
           onClick={() => resetOrder()}
-          size="large"
+          size="small"
           sx={{ paddingY: 2, paddingX: 4 }}
         >
           Reset
@@ -55,7 +55,7 @@ export const OrderCalculator = () => {
             onCreateOrder();
             resetOrder();
           }}
-          size="large"
+          size="small"
           variant="contained"
           sx={{ paddingY: 2, paddingX: 4 }}
         >

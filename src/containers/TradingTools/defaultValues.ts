@@ -7,6 +7,8 @@ export const createOrderDefaultValues = {
   takeProfit: "",
   stockastic: "",
   atr: "",
+  risk: 2,
+  reward: 7,
 };
 // PROFIT_CALCULATOR_FIELD_NAME.lotSize
 
