@@ -1,47 +1,29 @@
-# Getting Started with Create React App
+add colors , pag pipilian lang is yong nasa trading view colors, change the opacity nalang, create variables of color, NO hex code,
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+create 4 color variables, need kasi yon para sa Theme, (color combo lang na ginagamit madalas ng mga traders) 
 
-## Available Scripts
+primaryColor
+secondaryColor
+accentColor
+semanticColor
+neutralColor (kahit wag na, black gray, pang generic lang siguro)
 
-In the project directory, you can run:
+![image](https://user-images.githubusercontent.com/68400105/171084891-19a08527-0e70-474a-a264-5798cdc498f8.png)
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+todo: 
+kuha ka ideas ng mga need iadd sa web app, kunin mo yong mga useful sa myfxbook, (eg, rish of ruin calculator), tapos gawa ka new figma, badoy ng purple sa billion
 
-### `npm run build`
+pa try gumaawa ng same layout ng vercel, nasa taas yong navigations
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+<img width="1495" alt="image" src="https://user-images.githubusercontent.com/68400105/171085408-567c6077-20fa-4a41-9f72-6dab0d9f89bb.png">
+ganto sapat na tong apat na nav sa taas
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+<img width="1674" alt="image" src="https://user-images.githubusercontent.com/68400105/171085558-a09e4d9f-5f7b-4715-a15d-550d92c0967e.png">
+ganto primary colors
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-# Billon-react-ts
+sample logo
+![image](https://user-images.githubusercontent.com/68400105/171086222-2a9d0b68-b95e-49be-bab5-1fb36d2c2f0f.png)
